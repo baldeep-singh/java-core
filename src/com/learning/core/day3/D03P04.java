@@ -2,9 +2,9 @@ package com.learning.core.day3;
 public class D03P04
 {
     public static void main(String[] args) {
-        int[] array = {10, 5, 3, 4, 3, 5, 6}; // Example array, you can replace it with your array
+        int[] array = {10, 5, 3, 4, 3, 5, 6}; 
 
-        int[] seen = new int[100000]; // Assuming the maximum value of elements in the array is 100000
+        int[] seen = new int[100]; 
         int firstRepeatingIndex = -1;
 
         for (int i = 0; i < array.length; i++) {
