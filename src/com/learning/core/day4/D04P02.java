@@ -1,5 +1,4 @@
 package com.learning.core.day4;
-
 public class CricketRating {
     private String playerName;
     private float critic1;
@@ -42,7 +41,7 @@ public class CricketRating {
     }
 }
 
-class NotEligibleException extends Exception {
+public class NotEligibleException extends Exception {
     public NotEligibleException(String message) {
         super(message);
     }
@@ -59,8 +58,8 @@ public class D04P02 {
             System.out.println("Error: " + e.getMessage());
         }
 
-        CricketRating player2 = new CricketRating("Player2", 5, 6, 7);
-        player2.calculateAverageRating(player2.critic1, player2.critic2, player2.critic3);
+        CricketRating player2 = new CricketRating("Player2", 5, 6);
+        player2.calculateAverageRating(player2.critic1, player2.critic2);
         try {
             player2.coins = player2.calculateCoins();
             player2.display();
