@@ -1,79 +1,74 @@
 package com.learning.core.day4;
-public class CricketRating {
-    private String playerName;
-    private float critic1;
-    private float critic2;
-    private float critic3;
-    private float avgRating;
-    private String coins;
-
-    public CricketRating(String playerName, float critic1, float critic2, float critic3) {
-        this.playerName = playerName;
-        this.critic1 = critic1;
-        this.critic2 = critic2;
-        this.critic3 = critic3;
-    }
-
-    public void calculateAverageRating(float critic1, float critic2) {
-        this.avgRating = (critic1 + critic2) / 2;
-    }
-
-    public void calculateAverageRating(float critic1, float critic2, float critic3) {
-        this.avgRating = (critic1 + critic2 + critic3) / 3;
-    }
-
-    public String calculateCoins() throws NotEligibleException {
-        if (avgRating >= 7) {
-            return "Gold";
-        } else if (avgRating >= 5) {
-            return "Silver";
-        } else if (avgRating >= 2) {
-            return "Copper";
-        } else {
-            throw new NotEligibleException("Player is not eligible for any coin.");
-        }
-    }
-
-    public void display() {
-        System.out.println("Player Name: " + playerName);
-        System.out.println("Average Rating: " + avgRating);
-        System.out.println("Coins: " + coins);
-    }
-}
-
-public class NotEligibleException extends Exception {
-    public NotEligibleException(String message) {
+class LowBalanceException extends Exception {
+    public LowBalanceException(String message) {
         super(message);
     }
 }
 
-public class D04P02 {
+class NegativeAmountException extends Exception {
+    public NegativeAmountException(String message) {
+        super(message);
+    }
+}
+
+class BankAccount {
+    private int accNo;
+    private String custName;
+    private String accType;
+    private float balance;
+
+    public BankAccount(int accNo, String custName, String accType, float initialBalance) throws LowBalanceException, NegativeAmountException {
+        this.accNo = accNo;
+        this.custName = custName;
+        this.accType = accType;
+        
+        if (initialBalance < 0) {
+            throw new NegativeAmountException("Negative Amount");
+        }
+        
+        if (accType.equalsIgnoreCase("saving") && initialBalance < 1000) {
+            throw new LowBalanceException("lowBalance");
+        } else if (accType.equalsIgnoreCase("current") && initialBalance < 5000) {
+            throw new LowBalanceException("lowBalance");
+        }
+        
+        this.balance = initialBalance;
+    }
+
+    public void deposit(float amt) throws NegativeAmountException {
+        if (amt < 0) {
+            throw new NegativeAmountException("Negative Amount");
+        }
+        balance += amt;
+    }
+
+    public float getBalance() throws LowBalanceException {
+        if (accType.equalsIgnoreCase("saving") && balance < 1000) {
+            throw new LowBalanceException("lowBalance");
+        } else if (accType.equalsIgnoreCase("current") && balance < 5000) {
+            throw new LowBalanceException("lowBalance");
+        }
+        return balance;
+    }
+}
+
+public class D04P02{
     public static void main(String[] args) {
-        CricketRating player1 = new CricketRating("Player1", 8, 7, 9);
-        player1.calculateAverageRating(player1.critic1, player1.critic2, player1.critic3);
         try {
-            player1.coins = player1.calculateCoins();
-            player1.display();
-        } catch (NotEligibleException e) {
-            System.out.println("Error: " + e.getMessage());
+            BankAccount acc1 = new BankAccount(123, "john", "saving", 900);
+            acc1.deposit(-900); // Throws NegativeAmountException
+        } catch (LowBalanceException e) {
+            System.out.println(e.getMessage());
+        } catch (NegativeAmountException e) {
+            System.out.println(e.getMessage());
         }
 
-        CricketRating player2 = new CricketRating("Player2", 5, 6);
-        player2.calculateAverageRating(player2.critic1, player2.critic2);
         try {
-            player2.coins = player2.calculateCoins();
-            player2.display();
-        } catch (NotEligibleException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-
-        CricketRating player3 = new CricketRating("Player3", 1, 3, 4);
-        player3.calculateAverageRating(player3.critic1, player3.critic2, player3.critic3);
-        try {
-            player3.coins = player3.calculateCoins();
-            player3.display();
-        } catch (NotEligibleException e) {
-            System.out.println("Error: " + e.getMessage());
+            BankAccount acc2 = new BankAccount(123, "john", "saving", -900); // Throws NegativeAmountException
+        } catch (LowBalanceException e) {
+            System.out.println(e.getMessage());
+        } catch (NegativeAmountException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
