@@ -6,15 +6,14 @@ public class D03P02 {
         Scanner scanner = new Scanner(System.in);
 
         // Initialize the one-dimensional array
-        int[] oneDimArray = {10, 20, 30, 40, 50}; // Example array, you can initialize with your values
+        int[] oneDimArray = {10, 20, 30, 40, 50}; 
 
-        // Accept two numbers from the user in the range 1-40
+        
         System.out.print("Enter the first number (1-40): ");
         int num1 = scanner.nextInt();
         System.out.print("Enter the second number (1-40): ");
         int num2 = scanner.nextInt();
 
-        // Check if both numbers are present in the array
         boolean foundNum1 = false;
         boolean foundNum2 = false;
 
