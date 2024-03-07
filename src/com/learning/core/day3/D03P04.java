@@ -10,10 +10,10 @@ public class D03P04
         for (int i = 0; i < array.length; i++) {
             int element = array[i];
             if (seen[element] != 0) {
-                firstRepeatingIndex = seen[element] - 1; // Adjusting index to 0-based
+                firstRepeatingIndex = seen[element] - 1; 
                 break;
             } else {
-                seen[element] = i + 1; // Storing index (adding 1 to avoid confusion with initial value 0)
+                seen[element] = i + 1; 
             }
         }
 
