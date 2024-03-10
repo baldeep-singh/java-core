@@ -32,14 +32,12 @@ class Person implements Comparable<Person> {
         return salary;
     }
 
-    // Natural sorting by ID
-    @Override
+   
     public int compareTo(Person other) {
         return Integer.compare(this.id, other.id);
     }
 
-    // equals method override
-    @Override
+
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
@@ -50,8 +48,7 @@ class Person implements Comparable<Person> {
                 Objects.equals(name, person.name);
     }
 
-    // hashCode method override
-    @Override
+
     public int hashCode() {
         return Objects.hash(id, name, age, salary);
     }
@@ -59,7 +56,7 @@ class Person implements Comparable<Person> {
 
 public class D05P09{
     public static void main(String[] args) {
-        // Predefined info of 6 people
+
         Person person1 = new Person(1, "Alice", 30, 50000);
         Person person2 = new Person(2, "Bob", 40, 60000);
         Person person3 = new Person(3, "Charlie", 25, 45000);
@@ -67,7 +64,7 @@ public class D05P09{
         Person person5 = new Person(5, "Eve", 28, 52000);
         Person person6 = new Person(6, "Frank", 22, 40000);
 
-        // Storing in TreeSet for natural ordering (based on ID)
+   
         TreeSet<Person> peopleSet = new TreeSet<>();
         peopleSet.add(person1);
         peopleSet.add(person2);
@@ -76,7 +73,7 @@ public class D05P09{
         peopleSet.add(person5);
         peopleSet.add(person6);
 
-        // Calculate sum of all salaries
+
         double sumOfSalaries = 0;
         for (Person person : peopleSet) {
             sumOfSalaries += person.getSalary();
