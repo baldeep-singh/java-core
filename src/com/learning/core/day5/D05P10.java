@@ -32,14 +32,12 @@ class Person implements Comparable<Person> {
         return salary;
     }
 
-    // Natural sorting by ID
-    @Override
+    
     public int compareTo(Person other) {
         return Integer.compare(this.id, other.id);
     }
 
-    // equals method override
-    @Override
+    
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
@@ -67,7 +65,6 @@ public class D05P10 {
         Person person5 = new Person(5, "Eve", 28, 52000);
         Person person6 = new Person(6, "Frank", 22, 40000);
 
-        // Storing in TreeSet for natural ordering (based on ID)
         TreeSet<Person> peopleSet = new TreeSet<>();
         peopleSet.add(person1);
         peopleSet.add(person2);
@@ -76,7 +73,7 @@ public class D05P10 {
         peopleSet.add(person5);
         peopleSet.add(person6);
 
-        // Finding the first person whose name starts with "J"
+    
         for (Person person : peopleSet) {
             if (person.getName().startsWith("J")) {
                 System.out.println("First person whose name starts with 'J':");
