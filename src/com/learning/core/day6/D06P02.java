@@ -1,6 +1,7 @@
 package com.learning.core.day6;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 class PhoneBook {
     private String name;
@@ -20,7 +21,8 @@ class PhoneBook {
     }
 }
 
-public class D06P01 {
+public class D06P02
+{
     public static void main(String[] args) {
         Map<String, PhoneBook> phoneBook = new HashMap<>();
         String[][] data = {
@@ -31,18 +33,23 @@ public class D06P01 {
             {"Kathe", "9998887777"}
         };
 
+       
         for (String[] person : data) {
             String name = person[0];
             String phoneNumber = person[1];
             phoneBook.put(name, new PhoneBook(name, phoneNumber));
         }
 
-        System.out.println("Phone Book Details:");
-        System.out.println("-------------------");
-        for (Map.Entry<String, PhoneBook> entry : phoneBook.entrySet()) {
-            String name = entry.getKey();
-            PhoneBook details = entry.getValue();
-            System.out.println("Name: " + details.getName() + ", Phone Number: " + details.getPhoneNumber());
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the name to search: ");
+        String searchName = scanner.nextLine();
+
+        PhoneBook searchedPerson = phoneBook.get(searchName);
+
+        if (searchedPerson != null) {
+            System.out.println("Phone Number: " + searchedPerson.getPhoneNumber());
+        } else {
+            System.out.println("Person not found in the phone book.");
         }
     }
 }
